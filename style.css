@@ -946,3 +946,145 @@
            transition-duration: .01ms !important;
        }
    }
+   /* Distance Exhibit — text + photograph */
+.distance-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    max-width: 1100px;
+    margin: 50px auto;
+  }
+  
+  .distance-text {
+    text-align: left;
+  }
+  
+  .distance-text p {
+    margin-bottom: 22px;
+  }
+  
+  .distance-text blockquote {
+    margin: 35px 0 0;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--gold);
+    border-left: 2px solid var(--gold);
+    padding-left: 20px;
+  }
+  
+  .distance-photo {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .distance-photo img {
+    width: 100%;
+    height: auto !important;
+    display: block;
+    object-fit: contain !important;
+  }
+  
+  /* Mobile */
+  @media (max-width: 700px) {
+    .distance-layout {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+  
+    .distance-text {
+      text-align: center;
+    }
+  
+    .distance-text blockquote {
+      text-align: left;
+    }
+  }
+  /* FINAL EXHIBIT — CENTER THE WHOLE ARCHIVE FIGURE */
+.final-letter + .gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .final-letter + .gallery .photo-frame {
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .final-letter + .gallery .photo-frame img {
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .final-letter + .gallery .photo-frame figcaption {
+    width: 100%;
+    text-align: center;
+  }
+
+/* =========================================
+   MOBILE MUSEUM TICKET
+   ========================================= */
+
+   @media (max-width: 600px) {
+
+    .ticket-section {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+  
+    .ticket {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: 22px 18px;
+      overflow: hidden;
+    }
+  
+    .ticket-top,
+    .ticket-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.62rem;
+      letter-spacing: 1.2px;
+    }
+  
+    .ticket-top span,
+    .ticket-bottom span {
+      white-space: nowrap;
+    }
+  
+    .ticket-main {
+      padding: 32px 5px;
+      text-align: center;
+    }
+  
+    .ticket-label {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+  
+    .ticket-main h3 {
+      font-size: clamp(2rem, 11vw, 3rem);
+      letter-spacing: 4px;
+      margin: 8px 0 14px;
+      line-height: 1;
+    }
+  
+    .ticket-main p {
+      max-width: 230px;
+      margin: 0 auto;
+      line-height: 1.7;
+      font-size: 0.8rem;
+    }
+  
+    .ticket-note {
+      padding: 0 10px;
+      font-size: 0.7rem;
+      line-height: 1.6;
+    }
+  }
