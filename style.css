@@ -1,0 +1,941 @@
+/* =========================================================
+   THE MUSEUM OF US
+   Moonlit Vintage Museum — Black & Gold
+   ========================================================= */
+
+   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500&display=swap');
+
+
+   /* =========================================================
+      RESET
+      ========================================================= */
+   
+   * {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+   }
+   
+   html {
+       scroll-behavior: smooth;
+   }
+   
+   body {
+       background: #080808;
+       color: #f4efe5;
+       font-family: "Poppins", sans-serif;
+       font-weight: 300;
+       overflow-x: hidden;
+   }
+   
+   body.locked {
+       overflow: hidden;
+   }
+   
+   button {
+       font-family: inherit;
+   }
+   
+   img {
+       max-width: 100%;
+       display: block;
+   }
+   
+   
+   /* =========================================================
+      VARIABLES
+      ========================================================= */
+   
+   :root {
+       --black: #080808;
+       --black-soft: #101010;
+       --black-card: #151515;
+   
+       --gold: #d4af37;
+       --gold-light: #f0d77a;
+       --gold-dark: #8f7320;
+   
+       --cream: #f4efe5;
+       --muted: #aaa49a;
+   
+       --border: rgba(212, 175, 55, 0.35);
+   
+       --shadow:
+           0 20px 60px rgba(0, 0, 0, 0.6);
+   
+       --serif: "Cormorant Garamond", serif;
+       --display: "Cinzel", serif;
+   }
+   
+   
+   /* =========================================================
+      LOADING SCREEN
+      ========================================================= */
+   
+   #loader {
+       position: fixed;
+       inset: 0;
+       z-index: 9999;
+   
+       background:
+           radial-gradient(
+               circle at center,
+               #18150c 0%,
+               #080808 55%,
+               #000 100%
+           );
+   
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   
+       transition:
+           opacity 1.2s ease,
+           visibility 1.2s ease;
+   }
+   
+   #loader.hidden {
+       opacity: 0;
+       visibility: hidden;
+       pointer-events: none;
+   }
+   
+   .loader-content {
+       text-align: center;
+       width: 90%;
+       max-width: 600px;
+   
+       animation: loaderAppear 2s ease forwards;
+   }
+   
+   .loader-content h2 {
+       font-family: var(--serif);
+       font-weight: 400;
+       font-size: clamp(1.7rem, 5vw, 3rem);
+       color: var(--gold-light);
+       letter-spacing: 0.04em;
+   }
+   
+   .loader-content p {
+       margin-top: 20px;
+       font-size: 0.75rem;
+       letter-spacing: 0.3em;
+       text-transform: uppercase;
+       color: var(--muted);
+   }
+   
+   @keyframes loaderAppear {
+       from {
+           opacity: 0;
+           transform: translateY(20px);
+       }
+   
+       to {
+           opacity: 1;
+           transform: translateY(0);
+       }
+   }
+   
+   
+   /* =========================================================
+      STAR FIELD
+      ========================================================= */
+   
+   body::before {
+       content: "";
+       position: fixed;
+       inset: 0;
+   
+       pointer-events: none;
+       z-index: -1;
+   
+       background-image:
+           radial-gradient(circle, rgba(255,255,255,.6) 1px, transparent 1px),
+           radial-gradient(circle, rgba(212,175,55,.4) 1px, transparent 1px);
+   
+       background-size:
+           120px 120px,
+           190px 190px;
+   
+       background-position:
+           20px 30px,
+           70px 100px;
+   
+       opacity: 0.15;
+   }
+   
+   
+   /* =========================================================
+      LANDING
+      ========================================================= */
+   
+   .landing {
+       min-height: 100svh;
+       position: relative;
+   
+       display: flex;
+       align-items: center;
+       justify-content: center;
+   
+       text-align: center;
+   
+       padding: 40px 20px;
+   
+       background:
+           radial-gradient(
+               circle at 50% 35%,
+               rgba(212,175,55,0.09),
+               transparent 35%
+           ),
+           linear-gradient(
+               180deg,
+               #030303 0%,
+               #0d0d0d 100%
+           );
+   }
+   
+   .landing::before {
+       content: "";
+   
+       position: absolute;
+   
+       width: 420px;
+       height: 420px;
+   
+       border-radius: 50%;
+   
+       background: rgba(212,175,55,0.05);
+   
+       filter: blur(80px);
+   
+       pointer-events: none;
+   }
+   
+   .overlay {
+       position: absolute;
+       inset: 0;
+   
+       background:
+           linear-gradient(
+               rgba(0,0,0,.15),
+               rgba(0,0,0,.75)
+           );
+   
+       pointer-events: none;
+   }
+   
+   .landing-content {
+       position: relative;
+       z-index: 2;
+   
+       max-width: 900px;
+   
+       animation: landingReveal 2s ease forwards;
+   }
+   
+   @keyframes landingReveal {
+       from {
+           opacity: 0;
+           transform: translateY(35px);
+       }
+   
+       to {
+           opacity: 1;
+           transform: translateY(0);
+       }
+   }
+   
+   
+   /* =========================================================
+      MAIN TITLE
+      ========================================================= */
+   
+   .landing h1 {
+       font-family: var(--display);
+   
+       font-size: clamp(
+           2.3rem,
+           8vw,
+           6.5rem
+       );
+   
+       font-weight: 500;
+   
+       letter-spacing: 0.14em;
+   
+       color: var(--gold-light);
+   
+       text-shadow:
+           0 0 25px rgba(212,175,55,.15);
+   
+       line-height: 1.1;
+   }
+   
+   .intro {
+       margin: 35px auto 0;
+   
+       max-width: 650px;
+   
+       font-family: var(--serif);
+   
+       font-size: clamp(
+           1.3rem,
+           3vw,
+           2rem
+       );
+   
+       line-height: 1.7;
+   
+       color: #ddd6c9;
+   
+       white-space: pre-line;
+   }
+   
+   .curator {
+       margin-top: 30px;
+   
+       font-family: var(--serif);
+   
+       font-style: italic;
+   
+       font-size: 1.3rem;
+   
+       color: var(--gold-light);
+   
+       line-height: 1.6;
+   }
+   
+   
+   /* =========================================================
+      ENTER BUTTON
+      ========================================================= */
+   
+   #enterMuseum {
+       margin-top: 45px;
+   
+       padding: 15px 34px;
+   
+       background: transparent;
+   
+       border: 1px solid var(--gold);
+   
+       color: var(--gold-light);
+   
+       font-family: var(--display);
+   
+       font-size: 0.8rem;
+   
+       letter-spacing: 0.16em;
+   
+       cursor: pointer;
+   
+       transition:
+           background .4s ease,
+           color .4s ease,
+           transform .4s ease,
+           box-shadow .4s ease;
+   }
+   
+   #enterMuseum:hover {
+       background: var(--gold);
+   
+       color: #090909;
+   
+       transform: translateY(-3px);
+   
+       box-shadow:
+           0 10px 35px rgba(212,175,55,.25);
+   }
+   
+   #enterMuseum:active {
+       transform: scale(.97);
+   }
+   
+   
+   /* =========================================================
+      WARNING
+      ========================================================= */
+   
+   .warning {
+       margin: 50px auto 0;
+   
+       max-width: 500px;
+   
+       font-size: 0.65rem;
+   
+       line-height: 1.8;
+   
+       letter-spacing: 0.18em;
+   
+       text-transform: uppercase;
+   
+       color: #777;
+   
+       border-top: 1px solid rgba(212,175,55,.15);
+   
+       padding-top: 25px;
+   }
+   
+   
+   /* =========================================================
+      MUSEUM MAIN
+      ========================================================= */
+   
+   #museum {
+       display: none;
+   
+       opacity: 0;
+   
+       transition: opacity 1.5s ease;
+   }
+   
+   #museum.visible {
+       display: block;
+   
+       opacity: 1;
+   }
+   
+   
+   /* =========================================================
+      GENERAL EXHIBIT
+      ========================================================= */
+   
+   .exhibit {
+       position: relative;
+   
+       width: min(100% - 40px, 1050px);
+   
+       margin: 0 auto;
+   
+       min-height: 90vh;
+   
+       padding:
+           130px
+           30px;
+   
+       display: flex;
+   
+       flex-direction: column;
+   
+       justify-content: center;
+   
+       align-items: center;
+   
+       text-align: center;
+   
+       border-bottom:
+           1px solid
+           rgba(212,175,55,.12);
+   }
+   
+   .exhibit::before {
+       content: "";
+   
+       position: absolute;
+   
+       width: 200px;
+       height: 1px;
+   
+       top: 70px;
+   
+       background:
+           linear-gradient(
+               90deg,
+               transparent,
+               var(--gold),
+               transparent
+           );
+   }
+   
+   .exhibit > h2 {
+       font-family: var(--display);
+   
+       color: var(--gold);
+   
+       font-size: .75rem;
+   
+       letter-spacing: .3em;
+   
+       text-transform: uppercase;
+   
+       font-weight: 500;
+   
+       margin-bottom: 18px;
+   }
+   
+   .exhibit > h1 {
+       font-family: var(--display);
+   
+       font-size: clamp(
+           1.7rem,
+           5vw,
+           3.8rem
+       );
+   
+       color: var(--cream);
+   
+       letter-spacing: .05em;
+   
+       font-weight: 500;
+   
+       margin-bottom: 35px;
+   }
+   
+   .exhibit > p {
+       max-width: 700px;
+   
+       font-family: var(--serif);
+   
+       font-size: clamp(
+           1.15rem,
+           2.5vw,
+           1.55rem
+       );
+   
+       line-height: 1.8;
+   
+       color: #c9c2b6;
+   
+       margin-bottom: 25px;
+   }
+   
+   
+   /* =========================================================
+      MUSEUM TICKET
+      ========================================================= */
+   
+   .ticket-section {
+       min-height: 100svh;
+   
+       display: flex;
+   
+       align-items: center;
+   
+       justify-content: center;
+   
+       padding: 80px 20px;
+   }
+   
+   .ticket {
+       width: min(90%, 470px);
+   
+       padding: 55px 35px;
+   
+       text-align: center;
+   
+       position: relative;
+   
+       border:
+           1px solid
+           var(--gold);
+   
+       background:
+           linear-gradient(
+               145deg,
+               #181818,
+               #0b0b0b
+           );
+   
+       box-shadow:
+           0 30px 80px rgba(0,0,0,.7);
+   
+       overflow: hidden;
+   }
+   
+   .ticket::before,
+   .ticket::after {
+       content: "";
+   
+       position: absolute;
+   
+       width: 80px;
+       height: 80px;
+   
+       border: 1px solid var(--border);
+   }
+   
+   .ticket::before {
+       top: 15px;
+       left: 15px;
+   
+       border-right: none;
+       border-bottom: none;
+   }
+   
+   .ticket::after {
+       bottom: 15px;
+       right: 15px;
+   
+       border-left: none;
+       border-top: none;
+   }
+   
+   .ticket h2 {
+       font-family: var(--display);
+   
+       color: var(--gold);
+   
+       font-size: .75rem;
+   
+       letter-spacing: .25em;
+   
+       text-transform: uppercase;
+   
+       margin-bottom: 25px;
+   }
+   
+   .ticket h3 {
+       font-family: var(--serif);
+   
+       font-size: 1.8rem;
+   
+       font-weight: 400;
+   
+       color: var(--cream);
+   
+       margin-bottom: 35px;
+   }
+   
+   .ticket h1 {
+       font-family: var(--display);
+   
+       font-size: 2.1rem;
+   
+       color: var(--gold-light);
+   
+       letter-spacing: .12em;
+   
+       margin: 8px 0 30px;
+   }
+   
+   .ticket p {
+       color: var(--muted);
+   
+       font-size: .72rem;
+   
+       line-height: 1.8;
+   
+       letter-spacing: .15em;
+   
+       text-transform: uppercase;
+   
+       margin-top: 22px;
+   }
+   
+   .ticket p strong {
+       color: var(--gold);
+   
+       font-weight: 400;
+   }
+   
+   
+   /* =========================================================
+      GOLD FRAME
+      ========================================================= */
+   
+   .gold-frame {
+       width: min(90%, 550px);
+   
+       padding: 55px 30px;
+   
+       border: 8px double var(--gold);
+   
+       background:
+           radial-gradient(
+               circle at center,
+               rgba(212,175,55,.08),
+               transparent 65%
+           );
+   
+       box-shadow:
+           inset 0 0 35px rgba(212,175,55,.06),
+           0 20px 60px rgba(0,0,0,.6);
+   }
+   
+   .gold-frame h3 {
+       font-family: var(--display);
+   
+       color: var(--gold-light);
+   
+       font-size: 1.4rem;
+   
+       letter-spacing: .15em;
+   
+       margin-bottom: 35px;
+   }
+   
+   .gold-frame p {
+       font-family: var(--serif);
+   
+       font-size: 1.7rem;
+   
+       line-height: 1.35;
+   
+       color: var(--cream);
+   }
+   
+   
+   /* =========================================================
+      IMAGE FRAMES
+      ========================================================= */
+   
+   .photo-frame {
+       width: min(90%, 700px);
+   
+       padding: 12px;
+   
+       background:
+           linear-gradient(
+               135deg,
+               #6e5619,
+               #d4af37,
+               #725817,
+               #d4af37
+           );
+   
+       box-shadow:
+           0 25px 70px rgba(0,0,0,.7);
+   }
+   
+   .photo-frame img {
+       width: 100%;
+   
+       aspect-ratio: 4 / 5;
+   
+       object-fit: cover;
+   
+       background: #111;
+   }
+   
+   
+   /* =========================================================
+      GALLERY
+      ========================================================= */
+   
+   .gallery {
+       width: 100%;
+   
+       display: grid;
+   
+       grid-template-columns:
+           repeat(2, minmax(0, 1fr));
+   
+       gap: 25px;
+   
+       margin-top: 35px;
+   }
+   
+   .gallery img {
+       width: 100%;
+   
+       aspect-ratio: 4 / 5;
+   
+       object-fit: cover;
+   
+       border: 5px solid #1b1b1b;
+   
+       outline: 1px solid var(--gold-dark);
+   
+       box-shadow:
+           0 20px 45px rgba(0,0,0,.6);
+   
+       transition:
+           transform .5s ease,
+           filter .5s ease;
+   }
+   
+   .gallery img:hover {
+       transform: translateY(-8px);
+   
+       filter:
+           brightness(1.1)
+           contrast(1.05);
+   }
+   
+   
+   /* =========================================================
+      REASON CARDS
+      ========================================================= */
+   
+   .reason-card {
+       width: min(100%, 700px);
+   
+       padding: 35px 30px;
+   
+       margin: 12px 0;
+   
+       border:
+           1px solid
+           rgba(212,175,55,.2);
+   
+       background:
+           rgba(255,255,255,.025);
+   
+       transition:
+           transform .4s ease,
+           border-color .4s ease,
+           background .4s ease;
+   }
+   
+   .reason-card:hover {
+       transform: translateY(-5px);
+   
+       border-color:
+           rgba(212,175,55,.6);
+   
+       background:
+           rgba(212,175,55,.045);
+   }
+   
+   .reason-card h3 {
+       font-family: var(--display);
+   
+       color: var(--gold-light);
+   
+       font-size: 1rem;
+   
+       letter-spacing: .12em;
+   
+       margin-bottom: 15px;
+   }
+   
+   .reason-card p {
+       font-family: var(--serif);
+   
+       font-size: 1.25rem;
+   
+       color: #ccc4b6;
+   
+       line-height: 1.7;
+   }
+   
+   
+   /* =========================================================
+      SCROLL REVEAL
+      ========================================================= */
+   
+   .reveal {
+       opacity: 0;
+   
+       transform: translateY(40px);
+   
+       transition:
+           opacity 1s ease,
+           transform 1s ease;
+   }
+   
+   .reveal.active {
+       opacity: 1;
+   
+       transform: translateY(0);
+   }
+   
+   
+   /* =========================================================
+      SELECTION
+      ========================================================= */
+   
+   ::selection {
+       background: var(--gold);
+   
+       color: #050505;
+   }
+   
+   
+   /* =========================================================
+      SCROLLBAR
+      ========================================================= */
+   
+   ::-webkit-scrollbar {
+       width: 7px;
+   }
+   
+   ::-webkit-scrollbar-track {
+       background: #050505;
+   }
+   
+   ::-webkit-scrollbar-thumb {
+       background: #6f591d;
+   
+       border-radius: 20px;
+   }
+   
+   ::-webkit-scrollbar-thumb:hover {
+       background: var(--gold);
+   }
+   
+   
+   /* =========================================================
+      MOBILE
+      ========================================================= */
+   
+   @media (max-width: 700px) {
+   
+       .landing {
+           padding: 30px 18px;
+       }
+   
+       .landing h1 {
+           letter-spacing: .08em;
+       }
+   
+       .intro {
+           line-height: 1.6;
+       }
+   
+       .warning {
+           letter-spacing: .12em;
+       }
+   
+       .exhibit {
+           width: min(100% - 28px, 1050px);
+   
+           padding:
+               110px
+               10px;
+       }
+   
+       .exhibit::before {
+           top: 55px;
+       }
+   
+       .gallery {
+           grid-template-columns: 1fr;
+   
+           gap: 20px;
+       }
+   
+       .gold-frame {
+           padding: 45px 20px;
+       }
+   
+       .ticket {
+           padding:
+               50px
+               25px;
+       }
+   
+       .reason-card {
+           padding: 28px 20px;
+       }
+   }
+   
+   
+   /* =========================================================
+      REDUCED MOTION
+      ========================================================= */
+   
+   @media (prefers-reduced-motion: reduce) {
+   
+       *,
+       *::before,
+       *::after {
+           scroll-behavior: auto !important;
+   
+           animation-duration: .01ms !important;
+   
+           animation-iteration-count: 1 !important;
+   
+           transition-duration: .01ms !important;
+       }
+   }
